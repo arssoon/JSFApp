@@ -4,20 +4,33 @@ import pl.example.JSFApplication.entity.Employee;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
 @Named("employeeView")
-@ApplicationScoped
+@ViewScoped
 public class EmployeeView {
     private static List<Employee> employees;
+
+    public EmployeeService getService() {
+        return service;
+    }
+
+    public void setService(EmployeeService service) {
+        this.service = service;
+    }
+
+    @Inject
+    private EmployeeService service;
 
     @PostConstruct
     public void init() {
         employees = new ArrayList<>();
 
-        employees.add(new Employee(1, " asdf", "hahha", 12, "asfdas", "asdf"));
+        employees = service.getEmployeeList();
     }
 
     public void setEmployees(List<Employee> employees) {
