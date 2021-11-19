@@ -3,7 +3,6 @@ package pl.example.JSFApplication;
 import pl.example.JSFApplication.entity.Employee;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
