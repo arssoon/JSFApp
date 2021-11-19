@@ -52,29 +52,48 @@
       <artifactId>el-ri</artifactId>
       <version>1.0</version>
     </dependency>
-
     <dependency>
-      <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-server</artifactId>
-      <version>${jettyVersion}</version>
+      <groupId>javax.enterprise</groupId>
+      <artifactId>cdi-api</artifactId>
+      <version>1.2</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.jboss.weld.se</groupId>
+      <artifactId>weld-se-core</artifactId>
+      <version>2.3.4.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.enterprise</groupId>
+      <artifactId>jakarta.enterprise.cdi-api</artifactId>
+      <version>2.0.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.sqlserver</groupId>
+      <artifactId>mssql-jdbc</artifactId>
+      <version>9.4.0.jre8</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.6.1.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
   </dependencies>
 
   <build>
     <plugins>
       <plugin>
-        <!-- This plugin is needed for the servlet example -->
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${jettyVersion}</version>
       </plugin>
 
       <plugin>
-        <!-- This plugin copies the jetty-runner plugin which enables
-             running the war file as:
-                 java -jar target/dependency/jetty-runner.jar target/*.war
-         -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <version>2.3</version>
