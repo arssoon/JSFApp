@@ -1,9 +1,12 @@
 package pl.example.JSFApplication.entity;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "pracownicy")
+@MappedSuperclass
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,6 +87,7 @@ public class Employee {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     @Override
     public String toString() {

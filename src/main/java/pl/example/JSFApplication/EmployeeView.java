@@ -1,7 +1,6 @@
 package pl.example.JSFApplication;
 
 import pl.example.JSFApplication.entity.Employee;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -12,15 +11,7 @@ import java.util.List;
 @Named("employeeView")
 @ViewScoped
 public class EmployeeView {
-    private static List<Employee> employees;
-
-    public EmployeeService getService() {
-        return service;
-    }
-
-    public void setService(EmployeeService service) {
-        this.service = service;
-    }
+    private List<Employee> employees;
 
     @Inject
     private EmployeeService service;
@@ -28,8 +19,9 @@ public class EmployeeView {
     @PostConstruct
     public void init() {
         employees = new ArrayList<>();
-
         employees = service.getEmployeeList();
+//        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("createdStudentId",  studentObj.getId());
+
     }
 
     public void setEmployees(List<Employee> employees) {
