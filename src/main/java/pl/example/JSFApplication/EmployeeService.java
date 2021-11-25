@@ -7,8 +7,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pl.example.JSFApplication.dao.EmployeeDao;
 import pl.example.JSFApplication.entity.Employee;
-import pl.example.JSFApplication.factory.HibernateFactory;
 
+import javax.faces.bean.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,11 +20,11 @@ public class EmployeeService  {
     public EmployeeService() {
         employeeList = new ArrayList<>();
         employeeDao = new EmployeeDao();
-//        employeeList.add(new Employee(1, "Aro", "baza", 123, "test", "test"));
 
         try {
             SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
             Session session = sessionFactory.openSession();
+
             session.beginTransaction();
             employeeList = employeeDao.findAllEmployees(session);
             session.getTransaction().commit();

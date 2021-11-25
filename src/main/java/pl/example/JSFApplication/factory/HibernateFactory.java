@@ -16,7 +16,7 @@ public class HibernateFactory {
 //                "databaseName=work");
 //        configuration.setProperty("hibernate.connection.username", "arson");
 //        configuration.setProperty("hibernate.connection.password", "marker25");
-//        configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+//        configuration.setProperty("hibernate.dialect", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
 //        configuration.setProperty("connection.driver_class", "com.mysql.jdbc.Driver");
 //        configuration.setProperty("hibernate.hbm2ddl.auto", "update");
 //        configuration.setProperty("hibernate.connection.autocommit", "true");
@@ -32,21 +32,15 @@ public class HibernateFactory {
 //    }
 
     public static SessionFactory buildSessionFactory() {
-        try {/*from  www.  j  a va2  s.c  om*/
-            // Create the SessionFactory from hibernate.cfg.xml
+        try {
             Configuration configuration = new Configuration();
             configuration.configure("hibernate.cfg.xml");
-            System.out.println("Hibernate Configuration loaded");
 
-            //apply configuration property settings to StandardServiceRegistryBuilder
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
-            System.out.println("Hibernate serviceRegistry created");
 
             return configuration.buildSessionFactory(serviceRegistry);
         } catch (Throwable ex) {
-            // Make sure you log the exception, as it might be swallowed
-            System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }

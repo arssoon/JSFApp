@@ -1,5 +1,6 @@
 package pl.example.JSFApplication;
 
+import pl.example.JSFApplication.dao.EmployeeDao;
 import pl.example.JSFApplication.entity.Employee;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
@@ -15,9 +16,9 @@ public class EmployeeView {
     public EmployeeView() {
         employees = new ArrayList<>();
         service = new EmployeeService();
-//        employeeList.add(new Employee(1, "Aro", "baza", 123, "test", "test"));
 
         employees = service.getEmployeeList();
+//        employees = service.getEmployee(4);
     }
 
     public void setEmployees(List<Employee> employees) {

@@ -4,8 +4,10 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import pl.example.JSFApplication.entity.Employee;
 
+import javax.faces.bean.ApplicationScoped;
 import java.util.List;
 
+@ApplicationScoped
 public class EmployeeDao {
     private List <Employee> employees;
 

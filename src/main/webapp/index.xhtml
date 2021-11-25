@@ -12,7 +12,7 @@
 </h:head>
 <h:body>
     <h:form>
-        <h1>Jestem tutaj</h1>
+        <h1>Pracownicy firmy</h1>
         <p:dataTable var="employee" value="#{employeeView.employees}">
             <p:column headerText="Id">
                 <h:outputText value="#{employee.id}"/>
@@ -38,6 +38,11 @@
                 <h:outputText value="#{employee.email}"/>
             </p:column>
         </p:dataTable>
-    </h:form>
-</h:body>
-</html>
+        <h:button value="DODAJ"/>
+        <h:button value="POPRAW"/>
+        <h:button value="USUŃ"/>
+        </h:form>
+
+
+        </h:body>
+        </html>
