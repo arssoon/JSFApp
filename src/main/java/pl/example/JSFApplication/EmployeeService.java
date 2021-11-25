@@ -1,39 +1,29 @@
 package pl.example.JSFApplication;
 
-import org.hibernate.*;
+
+import org.hibernate.HibernateError;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import pl.example.JSFApplication.dao.EmployeeDao;
 import pl.example.JSFApplication.entity.Employee;
 import pl.example.JSFApplication.factory.HibernateFactory;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.faces.bean.*;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@ApplicationScoped
-public class EmployeeService implements Serializable {
-
+public class EmployeeService  {
     private List<Employee> employeeList;
+    public EmployeeDao employeeDao;
 
-//    private static Transaction transObj;
-//    private static Session session;
-
-    @Inject
-    private EmployeeDao employeeDao;
-
-    @PostConstruct
-    public void init() {
+    public EmployeeService() {
         employeeList = new ArrayList<>();
+        employeeDao = new EmployeeDao();
 //        employeeList.add(new Employee(1, "Aro", "baza", 123, "test", "test"));
 
         try {
-            SessionFactory sessionFactory = HibernateFactory.getSessionFactory();
+            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
             Session session = sessionFactory.openSession();
             session.beginTransaction();
             employeeList = employeeDao.findAllEmployees(session);
@@ -43,29 +33,17 @@ public class EmployeeService implements Serializable {
         }
     }
 
-//    public List<Employee> retrieveStudent() {
-//        Employee studentsObj;
-//        List<Employee>allStudents = new ArrayList();
-//        try {
-//            transObj = sessionObj.beginTransaction();
-//            Query queryObj = sessionObj.createQuery("from Employee");
-//            allStudents = queryObj.list();
-//            for(Employee stud : allStudents) {
-//                studentsObj = new Employee();
-//                studentsObj.setName(stud.getName());
-//                allStudents.add(studentsObj);
-//            }
-//            System.out.println("All The Students Records Are Fetched Successfully From Database");
-//
-//            // XHTML Response Text
-//            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("findStudentById", "true");
-//        } catch(Exception exceptionObj) {
-//            exceptionObj.printStackTrace();
-//        } finally {
-//            transObj.commit();
-//        }
-//        return allStudents;
-//    }
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
+    public EmployeeDao getEmployeeDao() {
+        return employeeDao;
+    }
+
+    public void setEmployeeDao(EmployeeDao employeeDao) {
+        this.employeeDao = employeeDao;
+    }
 
     public List<Employee> getEmployeeList() {
         return new ArrayList(employeeList);

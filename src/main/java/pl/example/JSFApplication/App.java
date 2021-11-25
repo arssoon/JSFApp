@@ -1,5 +1,6 @@
 //package pl.example.JSFApplication;
 //
+//import org.hibernate.cfg.Configuration;
 //import pl.example.JSFApplication.dao.EmployeeDao;
 //import pl.example.JSFApplication.entity.Employee;
 //import pl.example.JSFApplication.factory.HibernateFactory;
@@ -14,7 +15,8 @@
 //
 //    public static void main(String[] args) {
 //        try {
-//            SessionFactory sessionFactory = HibernateFactory.getSessionFactory();
+//            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+////            SessionFactory sessionFactory = HibernateFactory.buildSessionFactory();
 //            Session session = sessionFactory.openSession();
 //
 //            EmployeeDao employeeDao = new EmployeeDao();
@@ -103,6 +105,7 @@
 //        } catch (Exception ex) {
 //            System.out.println("Nie uzyskano połączenia z baza." + ex.getMessage());
 ////            log.error("Nie uzyskano połączenia z baza." + ex.getMessage());
+//            ex.printStackTrace();
 //        }
 //    }
 //

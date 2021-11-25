@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "pracownicy")
-@MappedSuperclass
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
