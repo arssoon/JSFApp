@@ -4,6 +4,7 @@ import pl.example.JSFApplication.entity.Employee;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class EmployeeView {
     private static Employee employee;
 
     public EmployeeView() {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
         employees = new ArrayList<>();
         service = new EmployeeService();
         employee = new Employee();
@@ -28,16 +30,13 @@ public class EmployeeView {
         employees = service.getEmployeeList();
     }
 
-    public String saveEmployee(){
+    public void saveEmployee(){
         Integer userId= service.getId();
         Employee employee = new Employee(userId, name, surname, age, nrPhone, email);
         service.save(employee);
-
-        return "output";
     }
     public List<Employee> getStudentDetailsById() {
         employees = service.findEmployeeById(id);
-
         for(Employee employee : employees) {
             id = employee.getId();
             name = employee.getName();
@@ -46,12 +45,17 @@ public class EmployeeView {
             nrPhone = employee.getNrPhone();
             email = employee.getEmail();
         }
-        System.out.println("Fetched Id? " + id + " Details Are: Name=" + name + ", Surname=" + surname + ", Age=" + age
-                + ", Nr Phone=" + nrPhone + ", Email=" + email);
         return employees;
     }
 
     public void updateEmployee() {
+        employee.setId(id);
+        employee.setName(name);
+        employee.setSurname(surname);
+        employee.setAge(age);
+        employee.setNrPhone(nrPhone);
+        employee.setEmail(email);
+
         service.updateEmployee(employee);
     }
 

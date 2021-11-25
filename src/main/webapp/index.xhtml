@@ -2,16 +2,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>JSF-App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script type="text/javascript">
+        function submitAction() {
+            var response = window.confirm('Czy na pewno chcesz usunąć?');
+
+            if (response) parent.parent.location.href = "Page where you wanna go to";
+            else return;
+        }
+    </script>
     <style type="text/css">
         .successText {
             padding-left: 22px;
@@ -19,15 +24,14 @@
             color: green;
         }
 
-        .outputLabel {
-            width: 150px;
-            height: 20px;
+        .buttons {
+            margin-left: 80px;
         }
     </style>
 </h:head>
 <h:body>
     <h:form>
-        <h1>Pracownicy firmy</h1>
+        <h2>Pracownicy firmy</h2>
         <p:dataTable var="employee" value="#{employeeView.employees}">
             <p:column headerText="Id">
                 <h:outputText value="#{employee.id}"/>
@@ -55,31 +59,35 @@
         </p:dataTable>
 
 
-        <h:panelGrid columns="2">
-            <h:commandButton value="FORMULARZ DODAWANIA PRACOWNIKA" action="saveEmployeeForm"
-                             styleClass="btn btn-primary btn-sm btnPos"/>
+        <h:panelGrid columns="3">
+            <h:panelGrid columns="1" style="margin-left: 40px">
+                <h3>Usuwanie pracownika</h3>
+                <h5>Proszę wypełnić ID pracownika.</h5>
+                <h:form id="employeeDeleteForm">
+                    <h:outputLabel value="Id:" styleClass="control-label"/>
+                    <h:inputText value="#{employeeView.id}" styleClass="form-control"/>
 
-            <h:commandButton value="FORMULARZ EDYCJI PRACOWNIKA" action="updateEmployeeForm"
-                             styleClass="btn btn-primary btn-sm btnPos"/>
-        </h:panelGrid>
-
-        <h3>Usuwanie pracownika</h3>
-        <h5>Proszę wypełnić pola.</h5>
-        <h:form id="employeeDeleteForm">
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Id:" styleClass="control-label"/>
-                <h:inputText value="#{employeeView.id}" styleClass="form-control"/>
-
-                <div class="form-group">
-                    <div class="col-xs-offset-2 col-xs-10">
-                        <h:commandButton value="Delete Student Record" action="#{employeeView.deleteEmployee}"
-                                         styleClass="btn btn-primary btn-sm btnPos"/>
+                    <div class="form-group">
+                        <div class="col-xs-offset-2 col-xs-10">
+                            <h:commandButton value="USUŃ" action="#{employeeView.deleteEmployee}"
+                                             onclick="submitAction()"
+                                             styleClass="btn btn-primary btn-sm btnPos"
+                                                style="margin-top: 15px"/>
+                        </div>
                     </div>
-                </div>
+                </h:form>
             </h:panelGrid>
             <h:outputText id="deleteResult" rendered="#{not empty deletedStudentId}"
-                          value="!! Student Record Deleted From Database !!" styleClass="successText"/>
-        </h:form>
+                          value="Usunieto pracownika z bazy." styleClass="successText"/>
+
+
+            <h:commandButton value="DODAJ PRACOWNIKA" action="saveEmployeeForm"
+                             styleClass="btn btn-primary btn-sm btnPos" style="margin-left: 80px"/>
+
+            <h:commandButton value="EDYCJA PRACOWNIKA" action="updateEmployeeForm"
+                             styleClass="btn btn-primary btn-sm btnPos" style="margin-left: 80px"/>
+
+        </h:panelGrid>
     </h:form>
 </h:body>
 </html>

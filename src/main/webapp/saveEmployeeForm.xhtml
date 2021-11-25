@@ -24,21 +24,21 @@
 
     <h:form id="employeeSaveForm">
 
-        <h:panelGrid columns="2">
-            <h:outputLabel value="Imie:" styleClass="outputLabel"/>
+        <h:panelGrid columns="2" style="margin-left: 40px">
+            <h:outputLabel value="Imie:" styleClass="outputLabel" style="margin-top: 15px"/>
             <h:inputText value="#{employeeView.name}"/>
-            <h:outputLabel value="Nazwisko:" styleClass="outputLabel"/>
+            <h:outputLabel value="Nazwisko:" styleClass="outputLabel" style="margin-top: 15px"/>
             <h:inputText value="#{employeeView.surname}"/>
-            <h:outputLabel value="Wiek:" styleClass="outputLabel"/>
+            <h:outputLabel value="Wiek:" styleClass="outputLabel" style="margin-top: 15px"/>
             <h:inputText value="#{employeeView.age}"/>
-            <h:outputLabel value="Numer telefonu:" styleClass="outputLabel"/>
+            <h:outputLabel value="Numer telefonu:" styleClass="outputLabel" style="margin-top: 15px"/>
             <h:inputText value="#{employeeView.nrPhone}"/>
-            <h:outputLabel value="Email:" styleClass="outputLabel"/>
+            <h:outputLabel value="Email:" styleClass="outputLabel" style="margin-top: 15px"/>
             <h:inputText value="#{employeeView.email}"/>
 
             <h:commandButton value="DODAJ" action="#{employeeView.saveEmployee}"
-                             styleClass="btn btn-primary btn-sm btnPos"/>
-            <h:commandButton value="POWRÓT" action="index" styleClass="btn btn-primary btn-sm btnPos"/>
+                             styleClass="btn btn-primary btn-sm btnPos" style="margin-top: 15px"/>
+            <h:commandButton value="POWRÓT" action="index" styleClass="btn btn-primary btn-sm btnPos" style="margin-top: 15px"/>
 
         </h:panelGrid>
 

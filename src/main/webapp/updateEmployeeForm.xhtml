@@ -19,56 +19,38 @@
             font-weight: bold;
             color: green;
         }
-
-        .stud-table {
-            border-collapse: collapse;
-        }
-
-        .stud-table-header {
-            text-align: center;
-            background: none repeat scroll 0 0 #E5E5E5;
-            border-bottom: 1px solid #BBBBBB;
-            padding: 2px;
-        }
-
-        .stud-table-row {
-            padding: 12px;
-            text-align: center;
-        }
     </style>
 </h:head>
 <h:body>
-    <h3>Aktualizowanie danych w bazie pracownika</h3>
+
+    <h3 class="marginLeft12"> Aktualizowanie danych w bazie pracownika </h3>
     <h5>Proszę wypełnić pola.</h5>
-
-    <!-- Form For Updating Existing Student Details -->
-    <h3 class="marginLeft12">4. Update Student Details</h3>
     <h:form id="employeeUpdateForm">
-        <h:panelGrid columns="2">
+        <h:panelGrid columns="2" style="margin-left: 40px">
 
-            <h:outputLabel value="Id:" styleClass="control-label"/>
+            <h:outputLabel value="Id:" styleClass="control-label" style="margin-top: 15px"/>
             <h:inputText value="#{employeeView.id}" styleClass="form-control"/>
             <h:commandButton value="Szukaj" action="#{employeeView.getStudentDetailsById}"
-                             styleClass="btn btn-primary btn-sm btnPos"/>
+                             styleClass="btn btn-primary btn-sm btnPos" style="margin-top: 15px"/>
             <br /><br />
-            <h:outputLabel value="Imie:" styleClass="control-label"/>
+            <h:outputLabel value="Imie:" styleClass="control-label" style="margin-top: 15px"/>
             <h:inputText value="#{employeeView.name}" styleClass="form-control"/>
 
-            <h:outputLabel value="Nazwisko:" styleClass="control-label"/>
+            <h:outputLabel value="Nazwisko:" styleClass="control-label" style="margin-top: 15px"/>
             <h:inputText value="#{employeeView.surname}" styleClass="form-control"/>
 
-            <h:outputLabel value="Wiek:" styleClass="control-label"/>
+            <h:outputLabel value="Wiek:" styleClass="control-label" style="margin-top: 15px"/>
             <h:inputText value="#{employeeView.age}" styleClass="form-control"/>
 
-            <h:outputLabel value="Numer telefonu:" styleClass="control-label"/>
+            <h:outputLabel value="Numer telefonu:" styleClass="control-label" style="margin-top: 15px"/>
             <h:inputText value="#{employeeView.nrPhone}" styleClass="form-control"/>
 
-            <h:outputLabel value="Email:" styleClass="control-label"/>
+            <h:outputLabel value="Email:" styleClass="control-label" style="margin-top: 15px"/>
             <h:inputText value="#{employeeView.email}" styleClass="form-control"/>
 
             <h:commandButton value="ZATWIERDZ ZMIANY" action="#{employeeView.updateEmployee}"
-                             styleClass="btn btn-primary btn-sm btnPos"/>
-            <h:commandButton value="POWRÓT" action="index" styleClass="btn btn-primary btn-sm btnPos"/>
+                             styleClass="btn btn-primary btn-sm btnPos" style="margin-top: 15px"/>
+            <h:commandButton value="POWRÓT" action="index" styleClass="btn btn-primary btn-sm btnPos" style="margin-top: 15px"/>
         </h:panelGrid>
         <h:outputText id="updateResult" rendered="#{not empty updatedStudentRecord}"
                       value="Pracownik został zaktualizowany w bazie" styleClass="successText"/>

@@ -18,11 +18,23 @@ public class EmployeeService {
     private static Transaction transObj;
     private static Session session = new Configuration().configure().buildSessionFactory().openSession();
 
+    public EmployeeService() {
+        employeeList = new ArrayList<>();
+        employeeDao = new EmployeeDao();
+
+        try {
+            transObj = session.beginTransaction();
+            employeeList = employeeDao.findAllEmployees(session);
+        } catch (HibernateError ex) {
+            ex.printStackTrace();
+        } finally {
+            transObj.commit();
+        }
+    }
     public void save(Employee employee) {
         try {
             transObj = session.beginTransaction();
-            session.save(employee);
-            System.out.println("Student Record With Id: " + employee.getId() + " Is Successfully Created In Database");
+            employeeDao.add(employee, session);
 
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("createdEmployeeId", employee.getId());
         } catch (Exception exceptionObj) {
@@ -35,9 +47,7 @@ public class EmployeeService {
     public void updateEmployee(Employee employee) {
         try {
             transObj = session.beginTransaction();
-//            session.update(employee);
             employeeDao.update(employee.getId(), employee, session);
-            System.out.println("Student Record With Id: " + employee.getId() + " Is Successfully Updated In Database");
 
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("updatedStudentRecord", "Success");
         } catch (Exception exceptionObj) {
@@ -45,7 +55,6 @@ public class EmployeeService {
         }
         finally {
             transObj.commit();
-            session.close();
         }
     }
 
@@ -88,19 +97,6 @@ public class EmployeeService {
             employeeId = results.get(0) + 1;
         }
         return employeeId;
-    }
-
-    public EmployeeService() {
-        employeeList = new ArrayList<>();
-        employeeDao = new EmployeeDao();
-
-        try {
-            session.beginTransaction();
-            employeeList = employeeDao.findAllEmployees(session);
-            session.getTransaction().commit();
-        } catch (HibernateError ex) {
-            ex.printStackTrace();
-        }
     }
 
     public void setEmployeeList(List<Employee> employeeList) {
