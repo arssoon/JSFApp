@@ -1,6 +1,7 @@
 package pl.example.JSFApplication.dao;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import pl.example.JSFApplication.entity.Employee;
 
@@ -45,7 +46,7 @@ public class EmployeeDao {
         }
     }
 
-    public String update(int id, Employee employeeNew, Session session) {
+    public void update(int id, Employee employeeNew, Session session) {
         try {
             Employee employee = session.get(Employee.class, id);
             employee.setName(employeeNew.getName());
@@ -55,17 +56,18 @@ public class EmployeeDao {
             employee.setEmail(employeeNew.getEmail());
 
             session.update(employee);
-            session.getTransaction().commit();
-            return "Aktualizacja przebiegła pomyślnie. ";
+//            session.getTransaction().commit();
+//            return "Aktualizacja przebiegła pomyślnie. ";
         } catch (Exception ex) {
-            return "Nie udało się zaktualizować danych użytkownika. " + ex.getMessage();
+            ex.printStackTrace();
+//            return "Nie udało się zaktualizować danych użytkownika. " + ex.getMessage();
         }
     }
     public String delete(int id, Session session) {
         try {
             Employee employee = session.get(Employee.class, id);
             session.delete(employee);
-            session.getTransaction().commit();
+//            session.getTransaction().commit();
             return "Użytkownik został usunięty. ";
         } catch (Exception ex) {
             return "Nie udało się usunąć użytkownika. " + ex.getMessage();
@@ -78,5 +80,4 @@ public class EmployeeDao {
 
         return employees;
     }
-
 }

@@ -1,0 +1,49 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <title>JSF Hibernate</title>
+    <style type="text/css">
+        .successText {
+            padding-left: 22px;
+            font-weight: bold;
+            color: green;
+        }
+
+        .outputLabel {
+            width: 150px;
+            height: 20px;
+        }
+    </style>
+</head>
+<h:body>
+    <h3>Dodawanie pracownika</h3>
+    <h5>Proszę wypełnić pola.</h5>
+
+    <h:form id="employeeSaveForm">
+
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Imie:" styleClass="outputLabel"/>
+            <h:inputText value="#{employeeView.name}"/>
+            <h:outputLabel value="Nazwisko:" styleClass="outputLabel"/>
+            <h:inputText value="#{employeeView.surname}"/>
+            <h:outputLabel value="Wiek:" styleClass="outputLabel"/>
+            <h:inputText value="#{employeeView.age}"/>
+            <h:outputLabel value="Numer telefonu:" styleClass="outputLabel"/>
+            <h:inputText value="#{employeeView.nrPhone}"/>
+            <h:outputLabel value="Email:" styleClass="outputLabel"/>
+            <h:inputText value="#{employeeView.email}"/>
+
+            <h:commandButton value="DODAJ" action="#{employeeView.saveEmployee}"
+                             styleClass="btn btn-primary btn-sm btnPos"/>
+            <h:commandButton value="POWRÓT" action="index" styleClass="btn btn-primary btn-sm btnPos"/>
+
+        </h:panelGrid>
+
+        <h:outputText id="saveResult" rendered="#{not empty createdEmployeeId}"
+                      value="Pracownik został zapisany w bazie" styleClass="successText"/>
+    </h:form>
+</h:body>
+</html>

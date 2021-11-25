@@ -5,10 +5,25 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
     <title>JSF-App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <style type="text/css">
+        .successText {
+            padding-left: 22px;
+            font-weight: bold;
+            color: green;
+        }
+
+        .outputLabel {
+            width: 150px;
+            height: 20px;
+        }
+    </style>
 </h:head>
 <h:body>
     <h:form>
@@ -38,11 +53,33 @@
                 <h:outputText value="#{employee.email}"/>
             </p:column>
         </p:dataTable>
-        <h:button value="DODAJ"/>
-        <h:button value="POPRAW"/>
-        <h:button value="USUŃ"/>
+
+
+        <h:panelGrid columns="2">
+            <h:commandButton value="FORMULARZ DODAWANIA PRACOWNIKA" action="saveEmployeeForm"
+                             styleClass="btn btn-primary btn-sm btnPos"/>
+
+            <h:commandButton value="FORMULARZ EDYCJI PRACOWNIKA" action="updateEmployeeForm"
+                             styleClass="btn btn-primary btn-sm btnPos"/>
+        </h:panelGrid>
+
+        <h3>Usuwanie pracownika</h3>
+        <h5>Proszę wypełnić pola.</h5>
+        <h:form id="employeeDeleteForm">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Id:" styleClass="control-label"/>
+                <h:inputText value="#{employeeView.id}" styleClass="form-control"/>
+
+                <div class="form-group">
+                    <div class="col-xs-offset-2 col-xs-10">
+                        <h:commandButton value="Delete Student Record" action="#{employeeView.deleteEmployee}"
+                                         styleClass="btn btn-primary btn-sm btnPos"/>
+                    </div>
+                </div>
+            </h:panelGrid>
+            <h:outputText id="deleteResult" rendered="#{not empty deletedStudentId}"
+                          value="!! Student Record Deleted From Database !!" styleClass="successText"/>
         </h:form>
-
-
-        </h:body>
-        </html>
+    </h:form>
+</h:body>
+</html>

@@ -39,6 +39,14 @@ public class Employee {
         this.email = email;
     }
 
+    public Employee(String name, String surname, int age, String nrPhone, String email) {
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.nrPhone = nrPhone;
+        this.email = email;
+    }
+
     public int getId() {
         return id;
     }

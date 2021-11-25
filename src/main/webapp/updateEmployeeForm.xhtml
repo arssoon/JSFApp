@@ -1,0 +1,77 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <title>JSF Hibernate</title>
+    <style type="text/css">
+        .btnPos {
+            margin: 12px;
+        }
+
+        .marginLeft12 {
+            margin-left: 12px;
+        }
+
+        .successText {
+            padding-left: 22px;
+            font-weight: bold;
+            color: green;
+        }
+
+        .stud-table {
+            border-collapse: collapse;
+        }
+
+        .stud-table-header {
+            text-align: center;
+            background: none repeat scroll 0 0 #E5E5E5;
+            border-bottom: 1px solid #BBBBBB;
+            padding: 2px;
+        }
+
+        .stud-table-row {
+            padding: 12px;
+            text-align: center;
+        }
+    </style>
+</h:head>
+<h:body>
+    <h3>Aktualizowanie danych w bazie pracownika</h3>
+    <h5>Proszę wypełnić pola.</h5>
+
+    <!-- Form For Updating Existing Student Details -->
+    <h3 class="marginLeft12">4. Update Student Details</h3>
+    <h:form id="employeeUpdateForm">
+        <h:panelGrid columns="2">
+
+            <h:outputLabel value="Id:" styleClass="control-label"/>
+            <h:inputText value="#{employeeView.id}" styleClass="form-control"/>
+            <h:commandButton value="Szukaj" action="#{employeeView.getStudentDetailsById}"
+                             styleClass="btn btn-primary btn-sm btnPos"/>
+            <br /><br />
+            <h:outputLabel value="Imie:" styleClass="control-label"/>
+            <h:inputText value="#{employeeView.name}" styleClass="form-control"/>
+
+            <h:outputLabel value="Nazwisko:" styleClass="control-label"/>
+            <h:inputText value="#{employeeView.surname}" styleClass="form-control"/>
+
+            <h:outputLabel value="Wiek:" styleClass="control-label"/>
+            <h:inputText value="#{employeeView.age}" styleClass="form-control"/>
+
+            <h:outputLabel value="Numer telefonu:" styleClass="control-label"/>
+            <h:inputText value="#{employeeView.nrPhone}" styleClass="form-control"/>
+
+            <h:outputLabel value="Email:" styleClass="control-label"/>
+            <h:inputText value="#{employeeView.email}" styleClass="form-control"/>
+
+            <h:commandButton value="ZATWIERDZ ZMIANY" action="#{employeeView.updateEmployee}"
+                             styleClass="btn btn-primary btn-sm btnPos"/>
+            <h:commandButton value="POWRÓT" action="index" styleClass="btn btn-primary btn-sm btnPos"/>
+        </h:panelGrid>
+        <h:outputText id="updateResult" rendered="#{not empty updatedStudentRecord}"
+                      value="Pracownik został zaktualizowany w bazie" styleClass="successText"/>
+    </h:form>
+</h:body>
+</html>

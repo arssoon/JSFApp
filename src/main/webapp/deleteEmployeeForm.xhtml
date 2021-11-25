@@ -1,0 +1,42 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <title>JSF Hibernate</title>
+    <style type="text/css">
+        .successText {
+            padding-left: 22px;
+            font-weight: bold;
+            color: green;
+        }
+        .outputLabel {
+            width: 150px;
+            height: 20px;
+        }
+    </style>
+</head>
+<h:body>
+    <h3>Usuwanie pracownika</h3>
+    <h5>Proszę wypełnić pola.</h5>
+
+    <h:form id="employeeDeleteForm">
+        <h:panelGrid columns="2">
+            <div class="form-group">
+                <h:outputLabel value="Id:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputText value="#{employeeView.id}" styleClass="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <h:commandButton value="Delete Student Record" action="#{employeeView.deleteEmployee}" styleClass="btn btn-primary btn-sm btnPos" />
+                    <h:commandButton value="POWRÓT" action="index" styleClass="btn btn-primary btn-sm btnPos"/>
+                </div>
+            </div>
+        </h:panelGrid>
+        <h:outputText id="deleteResult" rendered="#{not empty deletedStudentId}" value="Pracownik został usuniety z bazy" styleClass="successText" />
+    </h:form>
+</h:body>
+</html>
