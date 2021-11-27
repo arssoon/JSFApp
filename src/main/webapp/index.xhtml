@@ -9,14 +9,6 @@
     <title>JSF-App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script type="text/javascript">
-        function submitAction() {
-            var response = window.confirm('Czy na pewno chcesz usunąć?');
-
-            if (response) parent.parent.location.href = "Page where you wanna go to";
-            else return;
-        }
-    </script>
     <style type="text/css">
         .successText {
             padding-left: 22px;
@@ -56,6 +48,14 @@
             <p:column headerText="Email">
                 <h:outputText value="#{employee.email}"/>
             </p:column>
+
+            <p:column headerText="Edycja">
+                <h:selectBooleanCheckbox value="#{employeeView.deleteEmployee}"/>
+            </p:column>
+
+            <p:column headerText="Usuń">
+                <h:selectBooleanCheckbox value="#{employeeView.deleteEmployee}"/>
+            </p:column>
         </p:dataTable>
 
 
@@ -70,14 +70,13 @@
                     <div class="form-group">
                         <div class="col-xs-offset-2 col-xs-10">
                             <h:commandButton value="USUŃ" action="#{employeeView.deleteEmployee}"
-                                             onclick="submitAction()"
                                              styleClass="btn btn-primary btn-sm btnPos"
                                                 style="margin-top: 15px"/>
                         </div>
                     </div>
                 </h:form>
             </h:panelGrid>
-            <h:outputText id="deleteResult" rendered="#{not empty deletedStudentId}"
+            <h:outputText id="deleteResult" rendered="#{not empty deletedEmployee}"
                           value="Usunieto pracownika z bazy." styleClass="successText"/>
 
 

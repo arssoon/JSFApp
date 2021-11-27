@@ -1,15 +1,21 @@
 package pl.example.JSFApplication;
 
+import lombok.Getter;
+import lombok.Setter;
+import pl.example.JSFApplication.dao.EmployeeService;
 import pl.example.JSFApplication.entity.Employee;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;
 
-@ManagedBean(name = "employeeView", eager = true)
-@RequestScoped
+@Getter
+@Setter
+@ManagedBean(name = "employeeView")
+@ViewScoped
 public class EmployeeView {
     private List<Employee> employees;
     private EmployeeService service;
@@ -20,20 +26,22 @@ public class EmployeeView {
     private String nrPhone;
     private String email;
     private static Employee employee;
+    private boolean deleteEmployee;
 
     public EmployeeView() {
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
         employees = new ArrayList<>();
         service = new EmployeeService();
         employee = new Employee();
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
 
-        employees = service.getEmployeeList();
+        employees = service.getListOfEmployees();
     }
 
     public void saveEmployee(){
         Integer userId= service.getId();
         Employee employee = new Employee(userId, name, surname, age, nrPhone, email);
         service.save(employee);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("createdEmployeeId", employee.getId());
     }
     public List<Employee> getStudentDetailsById() {
         employees = service.findEmployeeById(id);
@@ -57,80 +65,14 @@ public class EmployeeView {
         employee.setEmail(email);
 
         service.updateEmployee(employee);
+
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("updatedEmployee", "Success");
     }
 
     public void deleteEmployee() {
         service.deleteEmpoyee(id);
+
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("deletedEmployee", id);
     }
 
-
-    public static Employee getEmployee() {
-        return employee;
-    }
-
-    public static void setEmployee(Employee employee) {
-        EmployeeView.employee = employee;
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getNrPhone() {
-        return nrPhone;
-    }
-
-    public void setNrPhone(String nrPhone) {
-        this.nrPhone = nrPhone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public EmployeeService getService() {
-        return service;
-    }
-    public void setService(EmployeeService service) {
-        this.service = service;
-    }
 }

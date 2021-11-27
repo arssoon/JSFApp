@@ -1,9 +1,16 @@
 package pl.example.JSFApplication.entity;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.persistence.*;
+import lombok.*;
+import org.hibernate.Hibernate;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "pracownicy")
 public class Employee {
@@ -27,18 +34,6 @@ public class Employee {
     @Column(name = "prac_email")
     private String email;
 
-    public Employee() {
-    }
-
-    public Employee(int id, String name, String surname, int age, String nrPhone, String email) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-        this.nrPhone = nrPhone;
-        this.email = email;
-    }
-
     public Employee(String name, String surname, int age, String nrPhone, String email) {
         this.name = name;
         this.surname = surname;
@@ -47,62 +42,18 @@ public class Employee {
         this.email = email;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(id, employee.id);
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getNrPhone() {
-        return nrPhone;
-    }
-
-    public void setNrPhone(String nrPhone) {
-        this.nrPhone = nrPhone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
 
     @Override
-    public String toString() {
-        return  "id = " + id + " | " +
-                "name = " + name + " | " +
-                "surname = " + surname + " | " +
-                "age = " + age + " | " +
-                "nr_phone = " + nrPhone  + " | " +
-                "email = " + email;
+    public int hashCode() {
+        return 0;
     }
 }
+
+
