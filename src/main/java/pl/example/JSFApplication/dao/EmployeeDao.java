@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @ApplicationScoped
-public class EmployeeService {
+public class EmployeeDao {
 
     public List <Employee> getListOfEmployees() {
         Session session = new Configuration().configure().buildSessionFactory().openSession();
@@ -90,7 +90,7 @@ public class EmployeeService {
         }
     }
 
-    public List<Employee> findEmployeeById(int id) {
+    public List<Employee> findEmployeesById(int id) {
         Session session = new Configuration().configure().buildSessionFactory().openSession();
         try {
             session.beginTransaction();

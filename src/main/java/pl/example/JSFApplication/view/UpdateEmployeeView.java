@@ -1,12 +1,11 @@
-package pl.example.JSFApplication;
+package pl.example.JSFApplication.view;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.example.JSFApplication.dao.EmployeeService;
+import pl.example.JSFApplication.dao.EmployeeDao;
 import pl.example.JSFApplication.entity.Employee;
 
 import javax.faces.bean.ManagedBean;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
@@ -14,11 +13,11 @@ import java.util.List;
 
 @Getter
 @Setter
-@ManagedBean(name = "employeeView")
+@ManagedBean(name = "updateEmployeeView")
 @ViewScoped
-public class EmployeeView {
+public class UpdateEmployeeView {
     private List<Employee> employees;
-    private EmployeeService service;
+    private EmployeeDao service;
     private int id;
     private String name;
     private String surname;
@@ -26,25 +25,16 @@ public class EmployeeView {
     private String nrPhone;
     private String email;
     private static Employee employee;
-    private boolean deleteEmployee;
 
-    public EmployeeView() {
-        employees = new ArrayList<>();
-        service = new EmployeeService();
-        employee = new Employee();
+    public UpdateEmployeeView() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
-
-        employees = service.getListOfEmployees();
+        employees = new ArrayList<>();
+        service = new EmployeeDao();
+        employee = new Employee();
     }
 
-    public void saveEmployee(){
-        Integer userId= service.getId();
-        Employee employee = new Employee(userId, name, surname, age, nrPhone, email);
-        service.save(employee);
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("createdEmployeeId", employee.getId());
-    }
-    public List<Employee> getStudentDetailsById() {
-        employees = service.findEmployeeById(id);
+    public List<Employee> getEmployeesById() {
+        employees = service.findEmployeesById(id);
         for(Employee employee : employees) {
             id = employee.getId();
             name = employee.getName();
@@ -68,11 +58,4 @@ public class EmployeeView {
 
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("updatedEmployee", "Success");
     }
-
-    public void deleteEmployee() {
-        service.deleteEmpoyee(id);
-
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("deletedEmployee", id);
-    }
-
 }

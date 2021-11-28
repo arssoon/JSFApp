@@ -26,31 +26,32 @@
     <h3 class="marginLeft12"> Aktualizowanie danych w bazie pracownika </h3>
     <h5>Proszę wypełnić pola.</h5>
     <h:form id="employeeUpdateForm">
-        <h:panelGrid columns="2" style="margin-left: 40px">
+        <h:panelGrid columns="2" style="margin-left: 40px" >
 
             <h:outputLabel value="Id:" styleClass="control-label" style="margin-top: 15px"/>
-            <h:inputText value="#{employeeView.id}" styleClass="form-control"/>
-            <h:commandButton value="Szukaj" action="#{employeeView.getStudentDetailsById}"
+            <h:inputText value="#{updateEmployeeView.id}" styleClass="form-control"/>
+            <h:commandButton value="Szukaj" action="#{updateEmployeeView.getEmployeesById}"
                              styleClass="btn btn-primary btn-sm btnPos" style="margin-top: 15px"/>
-            <br /><br />
+            <br/><br/>
             <h:outputLabel value="Imie:" styleClass="control-label" style="margin-top: 15px"/>
-            <h:inputText value="#{employeeView.name}" styleClass="form-control"/>
+            <h:inputText value="#{updateEmployeeView.name}" styleClass="form-control"/>
 
             <h:outputLabel value="Nazwisko:" styleClass="control-label" style="margin-top: 15px"/>
-            <h:inputText value="#{employeeView.surname}" styleClass="form-control"/>
+            <h:inputText value="#{updateEmployeeView.surname}" styleClass="form-control"/>
 
             <h:outputLabel value="Wiek:" styleClass="control-label" style="margin-top: 15px"/>
-            <h:inputText value="#{employeeView.age}" styleClass="form-control"/>
+            <h:inputText value="#{updateEmployeeView.age}" styleClass="form-control"/>
 
             <h:outputLabel value="Numer telefonu:" styleClass="control-label" style="margin-top: 15px"/>
-            <h:inputText value="#{employeeView.nrPhone}" styleClass="form-control"/>
+            <h:inputText value="#{updateEmployeeView.nrPhone}" styleClass="form-control"/>
 
             <h:outputLabel value="Email:" styleClass="control-label" style="margin-top: 15px"/>
-            <h:inputText value="#{employeeView.email}" styleClass="form-control"/>
+            <h:inputText value="#{updateEmployeeView.email}" styleClass="form-control"/>
 
-            <h:commandButton value="ZATWIERDZ ZMIANY" action="#{employeeView.updateEmployee}"
+            <h:commandButton value="ZATWIERDZ ZMIANY" action="#{updateEmployeeView.updateEmployee}"
                              styleClass="btn btn-primary btn-sm btnPos" style="margin-top: 15px"/>
-            <h:commandButton value="POWRÓT" action="index" styleClass="btn btn-primary btn-sm btnPos" style="margin-top: 15px"/>
+            <h:commandButton value="POWRÓT" action="index" styleClass="btn btn-primary btn-sm btnPos"
+                             style="margin-top: 15px"/>
         </h:panelGrid>
         <h:outputText id="updateResult" rendered="#{not empty updatedEmployee}"
                       value="Pracownik został zaktualizowany w bazie" styleClass="successText"/>
